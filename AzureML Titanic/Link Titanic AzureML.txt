@@ -1,0 +1,3 @@
+Predicción de supervivencia Titanic
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspaces/Experiments/Experiment/bda9c6b13de34973bfc7ab41662e84ee.f-id.22c86c38803442aabf9449779162dfbf/ViewExperiment
+

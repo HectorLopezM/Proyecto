@@ -1,0 +1,5 @@
+Sistema de recomendación en Azure ML de peliculas imdb
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspaces/Experiments/Experiment/bda9c6b13de34973bfc7ab41662e84ee.f-id.c95c215654db49de8829dee7857ee681/ViewExperiment
+
+Directorio con más proyectos:
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspace/Projects/ListProjects

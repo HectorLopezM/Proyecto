@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Script Name="Territorium" OptionId="Territorium"
+  ScriptEditorType="WIZARD_GENERATED_EDITOR" launchMultiple="false"
+  overrideVisibleParameters="false" refreshButtonAlwaysEnabled="false"
+  showLastRefreshedTime="false" synchronised="false" userCanEdit="true">
+  <ComponentConfig
+    component="com.opendoorlogistics.components.territorium"
+    configId="Optimiser settings" userCanEdit="true">
+    <Config>
+      <CapacitatedClustererConfig maxClusterQuantity="100.0"
+        maxSecondsOptimization="650" maxStepsOptimization="120"
+        minClusterQuantity="0.0" numberClusters="5" polygons="false"
+        useInputClusterTable="false" useSwapMoves="true">
+        <distancesConfig>
+          <externalConfig>
+            <nonDefaultFilename/>
+            <useDefaultFile>true</useDefaultFile>
+          </externalConfig>
+          <graphhopperConfig>
+            <graphDirectory>C:\Users\Hector\Desktop\Máster Big Data\Geomarketing\Tarea final\Mapa carreteras Espana</graphDirectory>
+            <timeMultiplier>1.0</timeMultiplier>
+          </graphhopperConfig>
+          <greatCircleConfig>
+            <DistanceMultiplier>1.0</DistanceMultiplier>
+            <SpeedMetresPerSec>22.352</SpeedMetresPerSec>
+          </greatCircleConfig>
+          <method>ROAD_NETWORK</method>
+          <outputConfig>
+            <DistanceWeighting>1.0</DistanceWeighting>
+            <DistanceOutputUnit>KILOMETRES</DistanceOutputUnit>
+            <TimeOutputUnit>HOURS</TimeOutputUnit>
+            <OutputTime>DISTANCE</OutputTime>
+            <TimeWeighting>1.0</TimeWeighting>
+          </outputConfig>
+        </distancesConfig>
+      </CapacitatedClustererConfig>
+    </Config>
+  </ComponentConfig>
+  <Adapter flags="0" id="Input data" userCanEdit="true">
+    <adapterType>NORMAL</adapterType>
+    <AdaptedTable FetchSourceFields="false" IsLimitedResults="false"
+      Join="false" MaxNumberRows="1000" fromDatastore="external"
+      fromTable="FarmaciasAnalizadasComas" isBatchKey="false"
+      isGroupBy="false" isOptional="false" isReportKey="false"
+      joinDatastore="" joinTable="" name="Customers">
+      <flags>1920</flags>
+      <AdaptedColumn from="id_involve" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="id" sortField="NO" type="STRING" useFormula="false">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn from="latitud" isBatchKey="false" isGroupBy="false"
+        isOptional="false" isReportKey="false" name="latitude"
+        sortField="NO" type="DOUBLE" useFormula="false">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn from="longitud" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="longitude" sortField="NO" type="DOUBLE" useFormula="false">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="1.0" from="Importancia" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="quantity" sortField="NO" type="DOUBLE" useFormula="false">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="1.0" isBatchKey="false" isGroupBy="false"
+        isOptional="true" isReportKey="false" name="cost-time"
+        sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>1</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="0.0" isBatchKey="false" isGroupBy="false"
+        isOptional="true" isReportKey="false" name="cost-distance"
+        sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>1</flags>
+      </AdaptedColumn>
+      <AdaptedColumn from="Territorio" isBatchKey="false"
+        isGroupBy="false" isOptional="true" isReportKey="false"
+        name="territory-id" sortField="NO" type="STRING" useFormula="false">
+        <flags>1</flags>
+      </AdaptedColumn>
+      <FilterFormula/>
+    </AdaptedTable>
+  </Adapter>
+  <Adapter flags="0" id="QuantityStats" userCanEdit="true">
+    <adapterType>NORMAL</adapterType>
+    <AdaptedTable FetchSourceFields="false" IsLimitedResults="false"
+      Join="false" MaxNumberRows="1000" fromDatastore="Input data"
+      fromTable="Customers" isBatchKey="false" isGroupBy="false"
+      isOptional="false" isReportKey="false" joinDatastore=""
+      joinTable="" name="QuantityStats">
+      <flags>0</flags>
+      <AdaptedColumn formula="&quot;All records&quot;"
+        isBatchKey="false" isGroupBy="true" isOptional="false"
+        isReportKey="false" name="GroupBy" sortField="NO" type="STRING" useFormula="true">
+        <flags>32</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="groupmin(quantity)" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="MinQuantity" sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="groupmax(quantity)" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="MaxQuantity" sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="groupavg(quantity)" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="AvgQuantity" sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="groupsum(quantity)" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="SumQuantity" sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <AdaptedColumn formula="groupcount()" isBatchKey="false"
+        isGroupBy="false" isOptional="false" isReportKey="false"
+        name="Count" sortField="NO" type="DOUBLE" useFormula="true">
+        <flags>0</flags>
+      </AdaptedColumn>
+      <FilterFormula/>
+    </AdaptedTable>
+  </Adapter>
+  <Option Name="Create input table(s)" OptionId="Create input table(s)"
+    launchMultiple="false" overrideVisibleParameters="false"
+    refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+    synchronised="false" userCanEdit="true">
+    <Instruction
+      component="com.opendoorlogistics.components.tables.creator.CreateTablesComponent"
+      datastore="external" executionMode="-1"
+      outputDatastore="Output of Create tables" userCanEdit="true" uuid="1eb20338-9bc3-4ff1-86ac-f6eb1b1443ce">
+      <Config>
+        <Tables userCanEdit="true">
+          <Table isBatchKey="false" isGroupBy="false" isOptional="false"
+            isReportKey="false" name="Customers">
+            <flags>1920</flags>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="id" type="STRING">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="latitude" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="longitude" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="quantity" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="cost-time" type="DOUBLE">
+              <flags>1</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="cost-distance" type="DOUBLE">
+              <flags>1</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="territory-id" type="STRING">
+              <flags>1</flags>
+            </Column>
+          </Table>
+        </Tables>
+      </Config>
+      <Config>
+        <Tables userCanEdit="true">
+          <Table isBatchKey="false" isGroupBy="false" isOptional="false"
+            isReportKey="false" name="Customers">
+            <flags>1920</flags>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="id" type="STRING">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="latitude" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="longitude" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="false" isReportKey="false" name="quantity" type="DOUBLE">
+              <flags>0</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="cost-time" type="DOUBLE">
+              <flags>1</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="cost-distance" type="DOUBLE">
+              <flags>1</flags>
+            </Column>
+            <Column isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="territory-id" type="STRING">
+              <flags>1</flags>
+            </Column>
+          </Table>
+        </Tables>
+      </Config>
+    </Instruction>
+    <Output datastore="Output of Create tables" destinationTable=""
+      inputTable="" type="COPY_ALL_TABLES" userCanEdit="true"/>
+  </Option>
+  <Option Name="Fill input tables with demo data"
+    OptionId="Fill input tables with demo data" launchMultiple="false"
+    overrideVisibleParameters="false" refreshButtonAlwaysEnabled="false"
+    showLastRefreshedTime="false" synchronised="false" userCanEdit="true">
+    <Instruction
+      component="com.opendoorlogistics.components.territorium"
+      configId="Optimiser settings" datastore="Input data"
+      executionMode="1002" outputDatastore="Output of Territorium"
+      userCanEdit="true" uuid="a3e2565e-f7e4-433c-a5a3-1eadaca581bb"/>
+  </Option>
+  <Option Name="Show territories map" OptionId="Show territories map"
+    launchMultiple="false" overrideVisibleParameters="false"
+    refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+    synchronised="true" userCanEdit="true">
+    <Adapter flags="0" id="Show territories map adapter" userCanEdit="true">
+      <adapterType>NORMAL</adapterType>
+      <AdaptedTable FetchSourceFields="false" IsLimitedResults="false"
+        Join="false" MaxNumberRows="1000" fromDatastore="Input data"
+        fromTable="Customers" isBatchKey="false" isGroupBy="false"
+        isOptional="false" isReportKey="false" name="drawables">
+        <flags>1920</flags>
+        <AdaptedColumn from="latitude" isBatchKey="false"
+          isGroupBy="false" isOptional="true" isReportKey="false"
+          name="Latitude" sortField="NO" type="DOUBLE" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn from="longitude" isBatchKey="false"
+          isGroupBy="false" isOptional="true" isReportKey="false"
+          name="Longitude" sortField="NO" type="DOUBLE" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="Geometry of the object. If this is not set a point is draw at the latitude-longitude instead."
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="Geometry" sortField="NO" type="GEOM" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="The text of this field will be shown on the map beside the point."
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="Label" sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          formula="if(len(&quot;territory-id&quot;)>0,randColour(&quot;territory-id&quot;),if(len(&quot;territory-id&quot;)>0,lerp(colour(1,0,0),randColour(&quot;territory-id&quot;),0.2),colour(0,0,0)))"
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="Colour" sortField="NO" type="COLOUR" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="&lt;html>Name of the symbol used when drawing a point.&lt;br>If this is null a circle is used. &lt;br>Available symbols are &quot;triangle&quot;,&quot;inverted-triangle&quot;,&quot;diamond&quot;,&quot;square&quot;,&quot;pentagon&quot;,&quot;star&quot;,&quot;fat-star&quot;,&quot;hexagon&quot;,&quot;circle&quot;.&lt;/html>"
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="Symbol" sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="Set to less than 1 if you want the object to be partially see-through, 0 for completely invisible."
+          formula="1.0" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="Opaque"
+          sortField="NO" type="DOUBLE" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="ColourKey"
+          sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn description="The width in pixels of the point."
+          formula="11" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="PixelWidth"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="The font size for the name. A value of 0 takes the default size. Less than zero deactivates the label."
+          formula="12" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="FontSize"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="Set this to 1 to draw an outline around the point or 0 otherwise."
+          formula="1" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="DrawOutline"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="Use this field to override the colour shown in the legend for the object."
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="LegendColour" sortField="NO"
+          type="COLOUR" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="This key field is used to populate the map's legend."
+          formula="if(len(&quot;territory-id&quot;)>0,&quot;territory-id&quot;,if(len(&quot;territory-id&quot;)>0,&quot;(Unrecognised) &quot; &amp; &quot;territory-id&quot;,&quot;#Unassigned&quot;))"
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="LegendKey" sortField="NO"
+          type="STRING" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn
+          description="This key field is used to select objects when you are drawing the map by calling the image formula."
+          isBatchKey="false" isGroupBy="false" isOptional="true"
+          isReportKey="false" name="ImageFormulaKey" sortField="NO"
+          type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="LabelGroupKey"
+          sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false"
+          name="NonOverlappingPolygonLayerGroupKey" sortField="NO"
+          type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="Tooltip"
+          sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="1" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="Selectable"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false"
+          name="LabelPositioningOption" sortField="NO" type="STRING" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="LabelColour"
+          sortField="NO" type="COLOUR" useFormula="false">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="0" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="LabelPriority"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="0" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="Flags"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="0" isBatchKey="false" isGroupBy="false"
+          isOptional="true" isReportKey="false" name="MinZoom"
+          sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="1000" isBatchKey="false"
+          isGroupBy="false" isOptional="true" isReportKey="false"
+          name="MaxZoom" sortField="NO" type="LONG" useFormula="true">
+          <flags>1</flags>
+        </AdaptedColumn>
+        <FilterFormula/>
+      </AdaptedTable>
+    </Adapter>
+    <Instruction
+      component="com.opendoorlogistics.studio.uicomponents.map"
+      datastore="Show territories map adapter" executionMode="-1"
+      userCanEdit="true" uuid="fbbe3d54-965a-4a03-8fe6-7cbe175e8093">
+      <Config>
+        <MapConfig>
+          <useCustomTooltips>false</useCustomTooltips>
+        </MapConfig>
+      </Config>
+      <Config>
+        <MapConfig>
+          <useCustomTooltips>false</useCustomTooltips>
+        </MapConfig>
+      </Config>
+    </Instruction>
+  </Option>
+  <Option Name="Show territory quantities report"
+    OptionId="Show territory quantities report" launchMultiple="false"
+    overrideVisibleParameters="false" refreshButtonAlwaysEnabled="false"
+    showLastRefreshedTime="false" synchronised="true" userCanEdit="true">
+    <EditorLabel>View the sum of quantities for each territory-id</EditorLabel>
+    <Adapter flags="0" id="MarkUnassigned" userCanEdit="true">
+      <adapterType>NORMAL</adapterType>
+      <AdaptedTable FetchSourceFields="false" IsLimitedResults="false"
+        Join="false" MaxNumberRows="1000" fromDatastore="Input data"
+        fromTable="Customers" isBatchKey="false" isGroupBy="false"
+        isOptional="false" isReportKey="false" name="MarkUnassigned">
+        <flags>0</flags>
+        <AdaptedColumn
+          formula="if(len(&quot;territory-id&quot;)>0,&quot;territory-id&quot;,&quot;#Unassigned&quot;)"
+          isBatchKey="false" isGroupBy="false" isOptional="false"
+          isReportKey="false" name="territory-id" sortField="NO"
+          type="STRING" useFormula="true">
+          <flags>0</flags>
+        </AdaptedColumn>
+        <AdaptedColumn from="quantity" isBatchKey="false"
+          isGroupBy="false" isOptional="false" isReportKey="false"
+          name="quantity" sortField="NO" type="DOUBLE" useFormula="false">
+          <flags>0</flags>
+        </AdaptedColumn>
+        <FilterFormula/>
+      </AdaptedTable>
+    </Adapter>
+    <Adapter flags="0" id="QuantitiesReportData" userCanEdit="true">
+      <adapterType>NORMAL</adapterType>
+      <AdaptedTable FetchSourceFields="false" IsLimitedResults="false"
+        Join="false" MaxNumberRows="1000" fromDatastore="MarkUnassigned"
+        fromTable="MarkUnassigned" isBatchKey="false" isGroupBy="false"
+        isOptional="false" isReportKey="false" name="Quantities">
+        <flags>0</flags>
+        <AdaptedColumn from="territory-id" isBatchKey="false"
+          isGroupBy="true" isOptional="false" isReportKey="false"
+          name="territory-id" sortField="NO" type="STRING" useFormula="false">
+          <flags>32</flags>
+        </AdaptedColumn>
+        <AdaptedColumn formula="groupsum(&quot;quantity&quot;)"
+          isBatchKey="false" isGroupBy="false" isOptional="false"
+          isReportKey="false" name="quantity-sum" sortField="NO"
+          type="DOUBLE" useFormula="true">
+          <flags>0</flags>
+        </AdaptedColumn>
+        <AdaptedColumn from="territory-id" isBatchKey="false"
+          isGroupBy="false" isOptional="false" isReportKey="false"
+          name="SortField" sortField="ASCENDING" type="STRING" useFormula="false">
+          <flags>0</flags>
+        </AdaptedColumn>
+        <FilterFormula>len("territory-id")&gt;0</FilterFormula>
+      </AdaptedTable>
+    </Adapter>
+    <Instruction
+      component="com.opendoorlogistics.studio.uicomponents.showtable"
+      datastore="QuantitiesReportData" executionMode="-1"
+      outputDatastore="Output of Show table" userCanEdit="true" uuid="ab81e5e5-b2f8-43ab-b1e4-1eae412bb85c">
+      <Config>
+        <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+      </Config>
+      <Config>
+        <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+      </Config>
+    </Instruction>
+  </Option>
+  <Option Name="Show quantity statistics"
+    OptionId="Show quantity statistics" launchMultiple="false"
+    overrideVisibleParameters="false" refreshButtonAlwaysEnabled="false"
+    showLastRefreshedTime="false" synchronised="true" userCanEdit="true">
+    <EditorLabel>View statistics on quantities</EditorLabel>
+    <Instruction
+      component="com.opendoorlogistics.studio.uicomponents.showtable"
+      datastore="QuantityStats" executionMode="-1"
+      outputDatastore="Output of Show table1" userCanEdit="true" uuid="e2480f9c-f6c3-4e9b-93c6-61ac1915cff2">
+      <Config>
+        <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+      </Config>
+      <Config>
+        <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+      </Config>
+    </Instruction>
+  </Option>
+  <Option Name="Optimiser" OptionId="Optimiser" launchMultiple="false"
+    overrideVisibleParameters="false" refreshButtonAlwaysEnabled="false"
+    showLastRefreshedTime="false" synchronised="false" userCanEdit="true">
+    <Option Name="Start optimisation" OptionId="Start optimisation"
+      launchMultiple="false" overrideVisibleParameters="false"
+      refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+      synchronised="false" userCanEdit="true">
+      <Instruction
+        component="com.opendoorlogistics.components.territorium"
+        configId="Optimiser settings" datastore="Input data"
+        executionMode="-1" outputDatastore="Output of Territorium1"
+        userCanEdit="true" uuid="4aa56886-0c53-46ca-8f03-9f637abe7027"/>
+    </Option>
+    <Option Name="Continue optimisation"
+      OptionId="Continue optimisation" launchMultiple="false"
+      overrideVisibleParameters="false"
+      refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+      synchronised="false" userCanEdit="true">
+      <Instruction
+        component="com.opendoorlogistics.components.territorium"
+        configId="Optimiser settings" datastore="Input data"
+        executionMode="1000" outputDatastore="Output of Territorium2"
+        userCanEdit="true" uuid="00360dd8-02f6-4be9-8a68-e4a763a1848d"/>
+    </Option>
+    <Option Name="Analyse results" OptionId="Analyse results"
+      launchMultiple="false" overrideVisibleParameters="false"
+      refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+      synchronised="false" userCanEdit="true">
+      <Option Name="Show map with centres"
+        OptionId="Show territories map with centres"
+        launchMultiple="false" overrideVisibleParameters="false"
+        refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+        synchronised="true" userCanEdit="true">
+        <Adapter flags="0" id="Show map input data with centres" userCanEdit="true">
+          <adapterType>NORMAL</adapterType>
+          <AdaptedTable FetchSourceFields="false"
+            IsLimitedResults="false" Join="false" MaxNumberRows="1000"
+            fromDatastore="Input data" fromTable="Customers"
+            isBatchKey="false" isGroupBy="false" isOptional="false"
+            isReportKey="false" name="drawables">
+            <flags>1920</flags>
+            <AdaptedColumn from="latitude" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Latitude" sortField="NO" type="DOUBLE" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn from="longitude" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Longitude" sortField="NO" type="DOUBLE" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Geometry of the object. If this is not set a point is draw at the latitude-longitude instead."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="Geometry" sortField="NO"
+              type="GEOM" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The text of this field will be shown on the map beside the point."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="Label" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              formula="if((len(&quot;territory-id&quot;)>0) &amp;&amp; lookupcount(&quot;territory-id&quot;,&quot;Output of Territorium3,Territories_Report&quot;,&quot;id&quot;)>0,lookup(&quot;territory-id&quot;,&quot;Output of Territorium3,Territories_Report&quot;,&quot;id&quot;,&quot;display-colour&quot;),if(len(&quot;territory-id&quot;)>0,lerp(colour(1,0,0),randColour(&quot;territory-id&quot;),0.2),colour(0,0,0)))"
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="Colour" sortField="NO"
+              type="COLOUR" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="&lt;html>Name of the symbol used when drawing a point.&lt;br>If this is null a circle is used. &lt;br>Available symbols are &quot;triangle&quot;,&quot;inverted-triangle&quot;,&quot;diamond&quot;,&quot;square&quot;,&quot;pentagon&quot;,&quot;star&quot;,&quot;fat-star&quot;,&quot;hexagon&quot;,&quot;circle&quot;.&lt;/html>"
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="Symbol" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Set to less than 1 if you want the object to be partially see-through, 0 for completely invisible."
+              formula="1.0" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="Opaque"
+              sortField="NO" type="DOUBLE" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="ColourKey"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The width in pixels of the point."
+              formula="11" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="PixelWidth"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The font size for the name. A value of 0 takes the default size. Less than zero deactivates the label."
+              formula="12" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="FontSize"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Set this to 1 to draw an outline around the point or 0 otherwise."
+              formula="1" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="DrawOutline"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Use this field to override the colour shown in the legend for the object."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="LegendColour" sortField="NO"
+              type="COLOUR" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="This key field is used to populate the map's legend."
+              formula="if((len(&quot;territory-id&quot;)>0) &amp;&amp; lookupcount(&quot;territory-id&quot;,&quot;Output of Territorium3,Territories_Report&quot;,&quot;id&quot;)>0,&quot;territory-id&quot;,if(len(&quot;territory-id&quot;)>0,&quot;(Unrecognised) &quot; &amp; &quot;territory-id&quot;,&quot;#Unassigned&quot;))"
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="LegendKey" sortField="NO"
+              type="STRING" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="This key field is used to select objects when you are drawing the map by calling the image formula."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="ImageFormulaKey" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="LabelGroupKey"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false"
+              name="NonOverlappingPolygonLayerGroupKey" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="Tooltip"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="1" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Selectable" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false"
+              name="LabelPositioningOption" sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="LabelColour"
+              sortField="NO" type="COLOUR" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="LabelPriority" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Flags" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="MinZoom" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="1000" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="MaxZoom" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <FilterFormula/>
+          </AdaptedTable>
+          <AdaptedTable FetchSourceFields="false"
+            IsLimitedResults="false" Join="false" MaxNumberRows="1000"
+            fromDatastore="Output of Territorium3"
+            fromTable="Territories_Report" isBatchKey="false"
+            isGroupBy="false" isOptional="false" isReportKey="false" name="inactive-foreground">
+            <flags>1920</flags>
+            <AdaptedColumn from="latitude" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Latitude" sortField="NO" type="DOUBLE" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn from="longitude" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Longitude" sortField="NO" type="DOUBLE" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Geometry of the object. If this is not set a point is draw at the latitude-longitude instead."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="Geometry" sortField="NO"
+              type="GEOM" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The text of this field will be shown on the map beside the point."
+              from="id" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="Label"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn from="display-colour" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Colour" sortField="NO" type="COLOUR" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="&lt;html>Name of the symbol used when drawing a point.&lt;br>If this is null a circle is used. &lt;br>Available symbols are &quot;triangle&quot;,&quot;inverted-triangle&quot;,&quot;diamond&quot;,&quot;square&quot;,&quot;pentagon&quot;,&quot;star&quot;,&quot;fat-star&quot;,&quot;hexagon&quot;,&quot;circle&quot;.&lt;/html>"
+              formula="&quot;fat-star&quot;" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Symbol" sortField="NO" type="STRING" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Set to less than 1 if you want the object to be partially see-through, 0 for completely invisible."
+              formula="1.0" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="Opaque"
+              sortField="NO" type="DOUBLE" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="ColourKey"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The width in pixels of the point."
+              formula="20" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="PixelWidth"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="The font size for the name. A value of 0 takes the default size. Less than zero deactivates the label."
+              formula="12" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="FontSize"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Set this to 1 to draw an outline around the point or 0 otherwise."
+              formula="1" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="DrawOutline"
+              sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="Use this field to override the colour shown in the legend for the object."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="LegendColour" sortField="NO"
+              type="COLOUR" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="This key field is used to populate the map's legend."
+              from="id" isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="LegendKey"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn
+              description="This key field is used to select objects when you are drawing the map by calling the image formula."
+              isBatchKey="false" isGroupBy="false" isOptional="true"
+              isReportKey="false" name="ImageFormulaKey" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="LabelGroupKey"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false"
+              name="NonOverlappingPolygonLayerGroupKey" sortField="NO"
+              type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="Tooltip"
+              sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="1" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Selectable" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false"
+              name="LabelPositioningOption" sortField="NO" type="STRING" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn isBatchKey="false" isGroupBy="false"
+              isOptional="true" isReportKey="false" name="LabelColour"
+              sortField="NO" type="COLOUR" useFormula="false">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="LabelPriority" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="Flags" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="0" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="MinZoom" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <AdaptedColumn formula="1000" isBatchKey="false"
+              isGroupBy="false" isOptional="true" isReportKey="false"
+              name="MaxZoom" sortField="NO" type="LONG" useFormula="true">
+              <flags>1</flags>
+            </AdaptedColumn>
+            <FilterFormula>"latitude"&lt;&gt;null</FilterFormula>
+          </AdaptedTable>
+        </Adapter>
+        <Instruction
+          component="com.opendoorlogistics.components.territorium"
+          configId="Optimiser settings" datastore="Input data"
+          executionMode="1001" outputDatastore="Output of Territorium3"
+          userCanEdit="true" uuid="d3994978-2677-40d1-8054-bf2b6245c238"/>
+        <Instruction
+          component="com.opendoorlogistics.studio.uicomponents.map"
+          datastore="Show map input data with centres"
+          executionMode="-1" userCanEdit="true" uuid="b6c686ad-e17f-4b8a-b95c-41693be48c2c">
+          <Config>
+            <MapConfig>
+              <useCustomTooltips>false</useCustomTooltips>
+            </MapConfig>
+          </Config>
+          <Config>
+            <MapConfig>
+              <useCustomTooltips>false</useCustomTooltips>
+            </MapConfig>
+          </Config>
+        </Instruction>
+      </Option>
+      <Option Name="Show customers report"
+        OptionId="Show customers report" launchMultiple="false"
+        overrideVisibleParameters="false"
+        refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+        synchronised="true" userCanEdit="true">
+        <Adapter flags="0" id="Adapter for table Customers_Report" userCanEdit="true">
+          <adapterType>NORMAL</adapterType>
+          <AdaptedTable FetchSourceFields="true"
+            IsLimitedResults="false" Join="false" MaxNumberRows="1000"
+            fromDatastore="Output of Territorium4"
+            fromTable="Customers_Report" isBatchKey="false"
+            isGroupBy="false" isOptional="false" isReportKey="false" name="Customers_Report">
+            <flags>0</flags>
+            <FilterFormula/>
+          </AdaptedTable>
+        </Adapter>
+        <Instruction
+          component="com.opendoorlogistics.components.territorium"
+          configId="Optimiser settings" datastore="Input data"
+          executionMode="1001" outputDatastore="Output of Territorium4"
+          userCanEdit="true" uuid="ed4ac15f-62ff-4769-a31a-a90e42bb72f5"/>
+        <Instruction
+          component="com.opendoorlogistics.studio.uicomponents.showtable"
+          datastore="Adapter for table Customers_Report"
+          executionMode="-1" outputDatastore="Output of Show table2"
+          userCanEdit="true" uuid="d7c70994-8e1e-4910-bc1e-a5fbde02da8e">
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+        </Instruction>
+      </Option>
+      <Option Name="Show territories report"
+        OptionId="Show territories report" launchMultiple="false"
+        overrideVisibleParameters="false"
+        refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+        synchronised="true" userCanEdit="true">
+        <Adapter flags="0" id="Adapter for table Territories_Report" userCanEdit="true">
+          <adapterType>NORMAL</adapterType>
+          <AdaptedTable FetchSourceFields="true"
+            IsLimitedResults="false" Join="false" MaxNumberRows="1000"
+            fromDatastore="Output of Territorium5"
+            fromTable="Territories_Report" isBatchKey="false"
+            isGroupBy="false" isOptional="false" isReportKey="false" name="Territories_Report">
+            <flags>0</flags>
+            <FilterFormula/>
+          </AdaptedTable>
+        </Adapter>
+        <Instruction
+          component="com.opendoorlogistics.components.territorium"
+          configId="Optimiser settings" datastore="Input data"
+          executionMode="1001" outputDatastore="Output of Territorium5"
+          userCanEdit="true" uuid="af6454d5-670b-4548-9e4a-9566a1718ac7"/>
+        <Instruction
+          component="com.opendoorlogistics.studio.uicomponents.showtable"
+          datastore="Adapter for table Territories_Report"
+          executionMode="-1" outputDatastore="Output of Show table3"
+          userCanEdit="true" uuid="a243806b-138b-483c-a332-2f46d3d820eb">
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+        </Instruction>
+      </Option>
+      <Option Name="Show solution report"
+        OptionId="Show solution report" launchMultiple="false"
+        overrideVisibleParameters="false"
+        refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+        synchronised="true" userCanEdit="true">
+        <Adapter flags="0" id="Adapter for table Solution_Report" userCanEdit="true">
+          <adapterType>NORMAL</adapterType>
+          <AdaptedTable FetchSourceFields="true"
+            IsLimitedResults="false" Join="false" MaxNumberRows="1000"
+            fromDatastore="Output of Territorium6"
+            fromTable="Solution_Report" isBatchKey="false"
+            isGroupBy="false" isOptional="false" isReportKey="false" name="Solution_Report">
+            <flags>0</flags>
+            <FilterFormula/>
+          </AdaptedTable>
+        </Adapter>
+        <Instruction
+          component="com.opendoorlogistics.components.territorium"
+          configId="Optimiser settings" datastore="Input data"
+          executionMode="1001" outputDatastore="Output of Territorium6"
+          userCanEdit="true" uuid="f9cbfe38-b548-41e7-b002-43d8af605bf0"/>
+        <Instruction
+          component="com.opendoorlogistics.studio.uicomponents.showtable"
+          datastore="Adapter for table Solution_Report"
+          executionMode="-1" outputDatastore="Output of Show table4"
+          userCanEdit="true" uuid="2cbaf22c-27e2-46d8-89f3-a74b63298dff">
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+          <Config>
+            <queryTableConfig showTableControl="true" useCopyOfTable="false"/>
+          </Config>
+        </Instruction>
+      </Option>
+      <Option Name="Export report tables to spreadsheet"
+        OptionId="Export report tables to spreadsheet"
+        launchMultiple="false" overrideVisibleParameters="false"
+        refreshButtonAlwaysEnabled="false" showLastRefreshedTime="false"
+        synchronised="false" userCanEdit="true">
+        <Instruction
+          component="com.opendoorlogistics.components.territorium"
+          configId="Optimiser settings" datastore="Input data"
+          executionMode="1001" outputDatastore="Output of Territorium7"
+          userCanEdit="true" uuid="8848aa37-79ad-4b9e-85dd-9af255914520"/>
+        <Output datastore="Output of Territorium7"
+          destinationTable="ReportCustomers"
+          inputTable="Customers_Report"
+          type="REPLACE_CONTENTS_OF_EXISTING_TABLE" userCanEdit="true"/>
+        <Output datastore="Output of Territorium7"
+          destinationTable="ReportTerritories"
+          inputTable="Territories_Report"
+          type="REPLACE_CONTENTS_OF_EXISTING_TABLE" userCanEdit="true"/>
+        <Output datastore="Output of Territorium7"
+          destinationTable="ReportSolution" inputTable="Solution_Report"
+          type="REPLACE_CONTENTS_OF_EXISTING_TABLE" userCanEdit="true"/>
+      </Option>
+    </Option>
+  </Option>
+  <CreatedByComponent>com.opendoorlogistics.components.territorium</CreatedByComponent>
+  <ScriptFormatVersion major="1" minor="0" revision="0"/>
+</Script>
