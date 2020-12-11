@@ -1,0 +1,8 @@
+AirBNB Project directory:
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspaces/Projects/Project/5ce30197-73f1-4e8a-bf4f-4132502b0a75/ProjectDetails
+
+Predicción:
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspaces/Experiments/Experiment/bda9c6b13de34973bfc7ab41662e84ee.f-id.c8b0f2fc64de45bfbf39b50a6adbd506/ViewExperiment
+
+Tratamiento de los datos:
+https://studio.azureml.net/Home/ViewWorkspaceCached/bda9c6b13de34973bfc7ab41662e84ee?#Workspaces/Experiments/Experiment/bda9c6b13de34973bfc7ab41662e84ee.f-id.da2e31f98a6c40c398ab75cd541c4378/ViewExperiment
